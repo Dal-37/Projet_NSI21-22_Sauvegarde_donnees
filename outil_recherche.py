@@ -1,4 +1,5 @@
 import os
+import time
 
 #Outil de recherche
 
@@ -34,3 +35,11 @@ if reqst[0] == "find":
         #extension 
         elif "-ext" in reqst[i]:
             ext = reqst[i].split("=")[1]
+
+#découvrir le format de la date
+print(os.listdir('C:/Users/AdemMADANI/OneDrive - Région Île-de-France/Bureau/NSI'))    
+
+date_fichier = os.stat('C:/Users/AdemMADANI/OneDrive - Région Île-de-France/Bureau/NSI/conversion_bases.txt').st_mtime
+
+print(time.gmtime(date_fichier))
+
