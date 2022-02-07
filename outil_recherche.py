@@ -4,11 +4,11 @@ import time
 #Outil de recherche
 
 #commande de l'utilisateur
-#commande = input(">>>")
+commande = input(">>>")
 
 #on decoupe la requete de l'utilisateur et on cherche à quelle fonction
 #elle correspond
-#reqst = commande.split(" ")
+reqst = commande.split(" ")
 name = ""
 size = ""
 led = ""
@@ -35,11 +35,48 @@ if reqst[0] == "find":
         #extension 
         elif "-ext" in reqst[i]:
             ext = reqst[i].split("=")[1]
+    
+    #recuperer le chemin du dossier
+    chemin = reqst[1]
+            
+    repertoire = os.listdir(chemin)
+    #resultat de la recherche
+    arborescence = []
+    #liste de fichier qui correspondent aux critères
+    
+    bon_nom = []
+    bon_taille = []
+    bon_date = []
+    bon_ext = []
+    
+    #on prend chaque critère s'il n'est pas vide
+    if name != "":
+        for file in repertoire:
+            if name in file:
+                #ajouter le fichier à la liste de nom correct
+                bon_nom.append(file)
+    
+    if size != "":
+        for file in repertoire:
+            if size in os.stat(chemin + file).st_size:
+                bon_taille.append(file)
+    if led != "":
+        for file in repertoire:
+            date_fichier = os.stat(chemin + file).st_mtime
+            date_fichier = time.gmtime(date_fichier)
+            jour = date_fichier.tm_mday
+            mois = date_fichier.tm_mon
+            annee = date_fichier.tm_year
+            #format de la date AAAA-MM-JJ
+            rch_annee = led.split("-")[0]
+            rch_mois = led.split("-")[1]
+            rch_jour = led.split("-")[2]
+            
+            if annee == rch_annee and jour ==rch_jour and mois==rch_mois:
+                bon_date.append(file)
+    if ext != "":
+        for file in repertoire:
+            if ext in file:
+                bon_ext.append(file)
 
-#découvrir le format de la date
-print(os.listdir('C:/Users/AdemMADANI/OneDrive - Région Île-de-France/Bureau/NSI'))    
-
-date_fichier = os.stat('C:/Users/AdemMADANI/OneDrive - Région Île-de-France/Bureau/NSI/conversion_bases.txt').st_mtime
-
-print(time.gmtime(date_fichier))
 
