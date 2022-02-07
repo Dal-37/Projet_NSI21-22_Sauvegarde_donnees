@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb  4 10:09:05 2022
-
-@author: zakiharafa
-"""
-
 import shutil
 import os 
 
