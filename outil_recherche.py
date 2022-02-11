@@ -41,7 +41,7 @@ if reqst[0] == "find":
             
     repertoire = os.listdir(chemin)
     #resultat de la recherche
-    arborescence = []
+    resultat = []
     #liste de fichier qui correspondent aux critères
     
     bon_nom = []
@@ -58,7 +58,7 @@ if reqst[0] == "find":
     
     if size != "":
         for file in repertoire:
-            if size in os.stat(chemin + file).st_size:
+            if size in os.stat(str(chemin)+str(file)).st_size:
                 bon_taille.append(file)
     if led != "":
         for file in repertoire:
@@ -78,5 +78,44 @@ if reqst[0] == "find":
         for file in repertoire:
             if ext in file:
                 bon_ext.append(file)
+                
+    #écriture du programme qui repère les similitudes dans les listes
+    
+    #on crée un tableau avec les listes pleines
+    list_pas_vide = []
+    if bon_nom != []:
+        list_pas_vide.append(bon_nom)
+    if bon_taille != []:
+        list_pas_vide.append(bon_taille)
+    if bon_date != []:
+        list_pas_vide.append(bon_date)
+    if bon_ext != []:
+        list_pas_vide.append(bon_ext)
+    
+    resultat_inter = []
+    #on recherchce chaque élément commun si les listes ne sont pas vides
+    if len(list_pas_vide) > 1:
+        for i in range(1, len(list_pas_vide)):
+            for file in list_pas_vide[0]:
+                if file in list_pas_vide[i]:
+                    resultat_inter.append(file)
+    else:
+        resultat = list_pas_vide[0]
+        
+    #on cherche le nombre de fois où un élément apparait dans la liste interédiaire, 
+    #s'il est égal à la longeur de la liste, c'est le fichier que l'on cherche
+    n = 0
+    for file in resultat_inter:
+        for o_file in resultat_inter:
+            if file == o_file:
+                n += 1
+        
+        if n == len(list_pas_vide):
+            resultat.append(file)
+            
+    #on afine avec une suppression des doublons car le fichiers se compte deux fois
+    set(resultat)
+    
+    print(resultat)
 
 
