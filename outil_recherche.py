@@ -26,15 +26,19 @@ if reqst[0] == "find":
         #nom
         if "-name" in reqst[i]:
             name = reqst[i].split("=")[1]
+            print(name)
         #taille
         elif "-size" in reqst[i]:
             size = reqst[i].split("=")[1]
+            print(size)
         #date de modification
         elif "-date" in reqst[i]:
             led = reqst[i].split("=")[1]
+            print(led)
         #extension 
         elif "-ext" in reqst[i]:
             ext = reqst[i].split("=")[1]
+            print(ext)
     
     #recuperer le chemin du dossier
     chemin = reqst[1]
@@ -58,22 +62,32 @@ if reqst[0] == "find":
     
     if size != "":
         for file in repertoire:
-            if size in os.stat(str(chemin)+str(file)).st_size:
+            if size == os.stat(chemin+file).st_size:
                 bon_taille.append(file)
     if led != "":
         for file in repertoire:
             date_fichier = os.stat(chemin + file).st_mtime
+            
             date_fichier = time.gmtime(date_fichier)
+            
             jour = date_fichier.tm_mday
+            print(jour)
             mois = date_fichier.tm_mon
+            print(mois)
             annee = date_fichier.tm_year
+            print(annee)
             #format de la date AAAA-MM-JJ
             rch_annee = led.split("-")[0]
-            rch_mois = led.split("-")[1]
-            rch_jour = led.split("-")[2]
-            
-            if annee == rch_annee and jour ==rch_jour and mois==rch_mois:
+            print(rch_annee)
+            rch_mois = led.split("-")[1].replace("-", "")
+            print(rch_mois)
+            rch_jour = led.split("-")[2].replace("-", "")
+            print(rch_jour)
+
+            if str(annee) == rch_annee and str(jour) ==rch_jour and str(mois)==rch_mois:
                 bon_date.append(file)
+                print(file)
+        print(bon_date)
     if ext != "":
         for file in repertoire:
             if ext in file:
@@ -95,7 +109,7 @@ if reqst[0] == "find":
     resultat_inter = []
     #on recherchce chaque élément commun si les listes ne sont pas vides
     if len(list_pas_vide) > 1:
-        for i in range(1, len(list_pas_vide)):
+        for i in range(0, len(list_pas_vide)):
             for file in list_pas_vide[0]:
                 if file in list_pas_vide[i]:
                     resultat_inter.append(file)
@@ -117,5 +131,3 @@ if reqst[0] == "find":
     set(resultat)
     
     print(resultat)
-
-
