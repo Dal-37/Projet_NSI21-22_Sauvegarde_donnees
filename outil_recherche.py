@@ -26,19 +26,16 @@ if reqst[0] == "find":
         #nom
         if "-name" in reqst[i]:
             name = reqst[i].split("=")[1]
-            print(name)
         #taille
         elif "-size" in reqst[i]:
             size = reqst[i].split("=")[1]
-            print(size)
         #date de modification
         elif "-date" in reqst[i]:
             led = reqst[i].split("=")[1]
-            print(led)
         #extension 
         elif "-ext" in reqst[i]:
             ext = reqst[i].split("=")[1]
-            print(ext)
+            
     
     #recuperer le chemin du dossier
     chemin = reqst[1]
@@ -71,23 +68,23 @@ if reqst[0] == "find":
             date_fichier = time.gmtime(date_fichier)
             
             jour = date_fichier.tm_mday
-            print(jour)
+            
             mois = date_fichier.tm_mon
-            print(mois)
+            
             annee = date_fichier.tm_year
-            print(annee)
+            
             #format de la date AAAA-MM-JJ
             rch_annee = led.split("-")[0]
-            print(rch_annee)
+            
             rch_mois = led.split("-")[1].replace("-", "")
-            print(rch_mois)
+            
             rch_jour = led.split("-")[2].replace("-", "")
-            print(rch_jour)
+            
 
             if str(annee) == rch_annee and str(jour) ==rch_jour and str(mois)==rch_mois:
                 bon_date.append(file)
-                print(file)
-        print(bon_date)
+                
+        
     if ext != "":
         for file in repertoire:
             if ext in file:
