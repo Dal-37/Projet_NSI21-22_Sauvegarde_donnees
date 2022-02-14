@@ -1,5 +1,6 @@
 import os
 import time
+import shutil
 
 #Outil de recherche
 
@@ -9,10 +10,15 @@ commande = input(">>>")
 #on decoupe la requete de l'utilisateur et on cherche à quelle fonction
 #elle correspond
 reqst = commande.split(" ")
+#outil de recherche
 name = ""
 size = ""
 led = ""
 ext = ""
+
+#outil de copie
+source=""
+destination=""
 
 if reqst[0] == "find":
     #parametre de la fonction find:
@@ -128,3 +134,15 @@ if reqst[0] == "find":
     set(resultat)
     
     print(resultat)
+    
+
+
+
+elif reqst[0] == "copy":
+    #source
+    source = reqst[1]
+    #destination
+    destination = reqst[2]
+            
+            
+    shutil.copyfile(source,destination)
