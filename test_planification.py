@@ -29,7 +29,7 @@ if reqst[0] == "plan":
         delay = 3600.0
     elif frequence == "-quart":
         delay = 6.0*3600.0
-    elif frequence == "demi":
+    elif frequence == "-demi":
         delay = 12.0*3600.0
     elif frequence == "-jour":
         delay = 24.0*3600.0
