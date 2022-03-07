@@ -67,7 +67,7 @@ try:
     
         if size != "":
             for file in repertoire:
-                if size == os.stat(chemin+file).st_size:
+                if int(size) == os.stat(chemin+file).st_size:
                     bon_taille.append(file)
         if led != "":
             for file in repertoire:
@@ -82,14 +82,14 @@ try:
                 annee = date_fichier.tm_year
             
                 #format de la date AAAA-MM-JJ
-                rch_annee = led.split("-")[0]
+                rch_annee = int(led.split("-")[0])
             
-                rch_mois = led.split("-")[1].replace("-", "")
+                rch_mois = int(led.split("-")[1].replace("-", ""))
             
-                rch_jour = led.split("-")[2].replace("-", "")
+                rch_jour = int(led.split("-")[2].replace("-", ""))
             
 
-                if str(annee) == rch_annee and str(jour) ==rch_jour and str(mois)==rch_mois:
+                if annee == rch_annee and jour ==rch_jour and mois==rch_mois:
                     bon_date.append(file)
                 
         
@@ -211,4 +211,4 @@ except PermissionError:
     print("Attention ! Veuillez spécifier le nom du fichier une fois copié dans le chemin cible.")
 
 except:
-    print("Veuillez vérifier votre commande ! Aucun espace ou anti-slash n'est admis dans les chemins d'accès.")
+   print("Veuillez vérifier votre commande ! Aucun espace ou anti-slash n'est admis dans les chemins d'accès. N'oubliez pas de finir le chemin par un slash.")
